@@ -13,7 +13,7 @@ module.exports = function(app) {
         });
     });
 
-    // PUT route /api/workouts
+    // PUT route /api/workouts work on this one
 app.put (''), function (req,res) {}
 
 
