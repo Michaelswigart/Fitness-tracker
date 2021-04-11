@@ -1,8 +1,9 @@
+ process.env.DOTENV_LOADED || require('dotenv').config();
 let mongoose = require("mongoose");
 let db = require("../models");
 
 mongoose.connect(
-  process.env.MONGODB_URI|| "mongodb://localhost/workout",
+  process.env.MONGODB_URI || "mongodb://localhost/workout",
   {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -132,6 +133,7 @@ let workoutSeed = [
 db.Workout.deleteMany({})
   .then(() => db.Workout.collection.insertMany(workoutSeed))
   .then(data => {
+    console.log(`database seeded: ${process.env.MONGODB_URI}`)
     console.log(data.result.n + " records inserted!");
     process.exit(0);
   })
