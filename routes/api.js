@@ -4,8 +4,8 @@ const router = require('express').Router();
     // GET route /api/workouts
     router.get('/api/workouts', function(req, res) {
         // Returning the current list of workouts
-        Workout.find()
-        .then(function(data) {
+        Workout.find({})
+        .then((data)=> {
             data.forEach(workout => {
                 let total = 0;
                 workout.exercises.forEach(e=>{
@@ -15,13 +15,14 @@ const router = require('express').Router();
             })
             res.json(data);
         })
-        .catch(function(err) {
+        .catch((err)=> {
             res.json(err);
         });
     });
 
     // PUT route /api/workouts
-router.put('/api/workouts/:id'), function (req,res) {
+router.put('/api/workouts/:id'), (req,res) => {
+    console.log("putrout called")
    Workout.findOneAndUpdate({
        _id: req.params.id
    },{
@@ -29,8 +30,9 @@ router.put('/api/workouts/:id'), function (req,res) {
    },{
        new:true
    }).then(data =>{
+       console.log("putrout succes")
       res.json(data)
-   }).catch(function(err) {
+   }).catch((err) => {
        res.json(err);
    })
 };
@@ -38,24 +40,24 @@ router.put('/api/workouts/:id'), function (req,res) {
 
 
     // POST route /api/workouts
-    router.post('/api/workouts', function (req, res) {
-        Workout.create({})
-        .then(function(data) {
+    router.post('/api/workouts', (req, res) => {
+        Workout.create(req.body)
+        .then((data)=> {
             res.json(data)
         })
-        .catch(function(err) {
+        .catch((err)=> {
             res.json(err); 
         });
     });
 
     // GET route /api/workouts/range
-    router.get('/api/workouts/range', function(req, res) {
+    router.get('/api/workouts/range', (req, res) => {
         // Returning the current list of workouts
         Workout.find({})
-        .then(function(data) {
+        .then((data)=> {
             res.json(data);
         })
-        .catch(function(err) {
+        .catch((err)=> {
             res.json(err);
         });
     });
