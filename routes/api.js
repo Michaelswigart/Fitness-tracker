@@ -6,10 +6,17 @@ const router = require('express').Router();
         // Returning the current list of workouts
         Workout.find()
         .then(function(data) {
+            data.forEach(workout => {
+                let total = 0;
+                workout.exercises.forEach(e=>{
+                    total += e.duration;
+                })
+                workout.totalDuration = total;
+            })
             res.json(data);
         })
         .catch(function(err) {
-            res.err(err);
+            res.json(err);
         });
     });
 
@@ -24,7 +31,7 @@ router.put('/api/workouts/:id'), function (req,res) {
    }).then(data =>{
       res.json(data)
    }).catch(function(err) {
-       res.err(err);
+       res.json(err);
    })
 };
 
@@ -37,7 +44,7 @@ router.put('/api/workouts/:id'), function (req,res) {
             res.json(data)
         })
         .catch(function(err) {
-            res.err(err); 
+            res.json(err); 
         });
     });
 
@@ -49,7 +56,7 @@ router.put('/api/workouts/:id'), function (req,res) {
             res.json(data);
         })
         .catch(function(err) {
-            res.err(err);
+            res.json(err);
         });
     });
      module.exports = router;
