@@ -34,4 +34,4 @@
    Github : [Michaelswigart](https://github.com/Michaelswigart)
   
   ## Links
-      https://fitness-tracker93.herokuapp.com
+      https://fitness-tracker93.herokuapp.com/
